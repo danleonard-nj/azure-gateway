@@ -1,29 +1,12 @@
+from framework.clients.cache_client import CacheClientAsync
 from framework.configuration.configuration import Configuration
 from framework.logger.providers import get_logger
-from framework.clients.cache_client import CacheClientAsync
-from framework.clients.http_client import HttpClient
 from framework.serialization.utilities import serialize
+from models.auth import AzureAuthConfiguration, AzureScope
 
 from clients.identity_client import IdentityClient
 
-
 logger = get_logger(__name__)
-
-
-class AzureScope:
-    ARM = 'https://management.core.windows.net/.default'
-    GRAPH = 'https://graph.microsoft.com/.default'
-
-
-class AzureAuthConfiguration:
-    def __init__(self, data):
-        self.auth_scope = data.get('auth_scope')
-        self.base_url = data.get('auth_base_url')
-        self.tenant_id = data.get('tenant_id')
-        self.az_admin_client_id = data.get(
-            'azure_admin_client')
-        self.az_admin_client_secret = data.get(
-            'azure_admin_secret')
 
 
 class AuthenticationClient:
@@ -35,7 +18,6 @@ class AuthenticationClient:
     ):
         self.__cache_client = cache_client
         self.__identity_client = identity_client
-        self.__http_client = HttpClient()
 
         self.__azure_auth = AzureAuthConfiguration(
             data=configuration.azure_auth)
@@ -91,7 +73,6 @@ class AuthenticationClient:
             client_name='azure-gateway-api')
 
         client_request['scope'] = AzureScope.ARM
-        # client_request['resource'] = resource_name
 
         logger.info(f'Client request: {serialize(client_request)}')
 
