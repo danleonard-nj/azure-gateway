@@ -42,4 +42,6 @@ class KubernetesService:
             tail_lines=tail_lines or 100)
 
         log_lines = logs.split('\n')
+        log_lines.reverse()
+
         return log_lines
