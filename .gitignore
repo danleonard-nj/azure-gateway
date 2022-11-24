@@ -1,8 +1,3 @@
-
-*
-!*/
-!*.*
-*.crt
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -144,14 +139,12 @@ dmypy.json
 cython_debug/
 
 
+
 key
 config.json
 config.dev.json
 config.local.json
 .env
 git-*
-*Dockerfile
 **/__pycache__
 **/.vscode
-*.crt
-**/*.crt
