@@ -1,0 +1,6 @@
+FROM ubuntu
+
+COPY . /home/staging
+
+RUN apt-get update -y
+RUN apt-get install -y git

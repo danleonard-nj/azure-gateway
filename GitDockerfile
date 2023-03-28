@@ -1,0 +1,9 @@
+FROM ubuntu-git
+
+COPY . /home/staging
+COPY .gitignore /home/staging/.gitignore
+
+# RUN apt-get update -y
+# RUN apt-get install -y git
+
+ENTRYPOINT ["/bin/bash", "/home/staging/git-sync.sh"]
